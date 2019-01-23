@@ -14,4 +14,4 @@ Simple program that does a "loop back" from UART0 to UART1 and back out from UAR
 
 Using two bluetooth modules for sending/receiving 32 characters from a base station wirelessly to another remote station and back.
 
-![bluetooth](./bluetooth.jpg)
+<img src="bluetooth.jpg" width="500">
