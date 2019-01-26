@@ -15,3 +15,7 @@ Simple program that does a "loop back" from UART0 to UART1 and back out from UAR
 Using two bluetooth modules for sending/receiving 32 characters from a base station wirelessly to another remote station and back.
 
 <img src="bluetooth.jpg" width="500">
+
+## LED Fade
+
+A program which will fade an LED from minimum brightness (OFF) to maximum brightness (ON) using the PWM timer. The fading period (min to max to min) should be close to our "breathing" period, which is 20 breaths per min for an adult, or once every 3 seconds, similar to when a laptop sleeps.
