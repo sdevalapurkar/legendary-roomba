@@ -25,3 +25,11 @@ A program which will fade an LED from minimum brightness (OFF) to maximum bright
 Using a PS/2 like Joystick, we calibrated the min and max reading on the X and Y axes, and identified a "dead band" (a range of values) that is very noisy (i.e., unreliable readings).
 
 Added functionality such that at the max/min position, the LED light will "breathe" faster and at the neutral position the LED will "breathe" at a constant rate.
+
+## Servo Motor Sweep
+
+A simple program that sweeps the shaft of a RC servo motor back and forth across 180 degrees. Uses the Arduino servo library and its functions for this purpose.
+
+A servo motor is controlled by a pulse varying in width from 500uSec to 2500uSec precisely and periodically. Typically, a pulse is sent once every 20 to 30 mSec. This is the base-period of a PPM control signal, which can control up to 8 servo motors in a RC-remote-controller. Each servo is controlled by a pulse ranged from 0.5mSec to 2.5mSec (500uS to 2500uS). So, for eight servo motors, we need to send 8 x 2.5mSec = 20mSec, which is the minimum based period of a PPM signal.
+
+Center of the servo movement is at 1500 us (90 degrees) and far left and right are at 1000 us (0 degrees) and 2000 us (180 degrees) respectively.
