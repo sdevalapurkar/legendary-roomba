@@ -41,8 +41,7 @@ void loop() {
       if (joyRButtonState.toInt() == 0) {
         delay(50);  //delay for debounce
     
-        if(toggle) {
-          Serial.print("hey");
+        if (toggle) {
           digitalWrite(laserPin, HIGH);   // set the LED on
           toggle = !toggle;
         } else {
@@ -52,10 +51,8 @@ void loop() {
       }
 
       if (joyRX.toInt() < 300) {
-        Serial.print("yoooo");
         if (initial_positionX < 10) { 
         } else { 
-          Serial.print("guiuuuuuy");
           initial_positionX = initial_positionX - 1; 
           servoX.write (initial_positionX);
           delay(50); 
@@ -63,7 +60,6 @@ void loop() {
       } 
   
       if (joyRX.toInt() > 700) {
-        Serial.print("yoooo22222");
         if (initial_positionX > 180) {  
         } else {
           initial_positionX = initial_positionX + 1;
