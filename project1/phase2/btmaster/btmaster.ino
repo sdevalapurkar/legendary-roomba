@@ -44,6 +44,20 @@ void setup () {
   lcd.begin(16, 2);
   lcd.clear();
 
+  // Scheduler testing pins
+  pinMode(28, OUTPUT);
+  digitalWrite(28, LOW);
+  pinMode(29, OUTPUT);
+  digitalWrite(29, LOW);
+  pinMode(30, OUTPUT);
+  digitalWrite(30, LOW);
+  pinMode(31, OUTPUT);
+  digitalWrite(31, LOW);
+  pinMode(32, OUTPUT);
+  digitalWrite(32, LOW);
+  pinMode(33, OUTPUT);
+  digitalWrite(33, LOW);
+
   Scheduler_Init();
 
   Scheduler_StartTask(0, 50, readSensors);
@@ -54,8 +68,9 @@ void setup () {
   Scheduler_StartTask(0, 50, checkJoyRAxis);
 }
 
-
+// Testing pin 28 - ch1
 void readSensors(){
+  digitalWrite(28, HIGH);
   lightSensorValue = analogRead(lightPin);
   x_pos = analogRead(joyRX);  
   y_pos = analogRead(joyRY);
@@ -63,10 +78,12 @@ void readSensors(){
   sensorValue[0] = digitalRead(joyRbutton);
   sensorValue[1] = analogRead(joyRX);  
   sensorValue[2] = analogRead(joyRY);
+  digitalWrite(28, LOW);
 }
 
-
+// Testing pin 29 - ch2
 void sendValues(){
+  digitalWrite(29, HIGH);
   for (int k=0; k<3; k++){
     Serial1.print(sensorValue[k]);
     if (k<2){
@@ -75,29 +92,31 @@ void sendValues(){
   }
   Serial1.print('*');
   Serial1.println();
+  digitalWrite(29, LOW);
 }
 
-
+// Testing pin 30 - ch3
 void checkLightSensor(){
+  digitalWrite(30, HIGH);
   if (lightSensorValue > 900){
     lcdPrint("HIT             ");
   } else{
     lcdPrint("ALIVE            ");
   }
+  digitalWrite(30, LOW);
 }
-
 
 void lcdPrint(String text){
   lcd.print(text);
 }
 
-
+// Testing pin 31 - ch4
 void checkJoyRAxis(){
+  digitalWrite(31, HIGH);
   if (x_pos < 300){
     if (initial_positionX < 10) { 
     } else { 
       lcdPrint("RIGHT           "); 
-//      delay(50); 
     } 
   } 
   
@@ -105,7 +124,6 @@ void checkJoyRAxis(){
     if (initial_positionX > 180){  
     } else {
       lcdPrint("LEFT             ");
-//      delay(50);
     }
   }
 
@@ -113,7 +131,6 @@ void checkJoyRAxis(){
     if (initial_positionY < 10) { 
     } else { 
       lcdPrint("UP               ");
-//      delay(50); 
       } 
    } 
   
@@ -121,19 +138,23 @@ void checkJoyRAxis(){
     if (initial_positionY > 180){  
     } else{
       lcdPrint("DOWN             ");
-//      delay(50);
     }
   }
+  digitalWrite(31, LOW);
 }
 
-
+// Testing pin 32 - ch5
 void setCursorZero(){
+  digitalWrite(32, HIGH);
   lcd.setCursor(0, 0);
+  digitalWrite(32, LOW);
 }
 
-
+// Testing pin 33 - ch6
 void setCursorOne(){
+  digitalWrite(33, HIGH);
   lcd.setCursor(0, 1);
+  digitalWrite(33, LOW);
 }
 
 
@@ -145,14 +166,6 @@ void loop() {
     idle(idle_period);
   }
   
-//  readSensors();
-//  sendValues();
-//  
-//  setCursors(0, 0);
-//  checkLightSensor();
-//
-//  setCursors(0,1);
-//  checkJoyRAxis();
 }
 
 int main() {
