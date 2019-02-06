@@ -44,7 +44,7 @@ void loop ( ) {
   Serial.println(lightSensorValue); 
 
   lcd.setCursor(0, 0);
-  if (lightSensorValue < 80){
+  if (lightSensorValue > 900){
     lcd.print("HIT             ");
   } else{
     lcd.print("ALIVE            ");
