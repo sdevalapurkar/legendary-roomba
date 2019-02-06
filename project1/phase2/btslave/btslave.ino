@@ -27,6 +27,15 @@ void setup() {
   servoY.write(initial_positionY);
   servoX.write(initial_positionX);
 
+  // Scheduler testing pins
+  pinMode(7, OUTPUT);
+  pinMode(28, OUTPUT);
+  digitalWrite(28, LOW);
+  pinMode(29, OUTPUT);
+  digitalWrite(29, LOW);
+  pinMode(30, OUTPUT);
+  digitalWrite(30, LOW);
+
   Scheduler_Init();
  
   Scheduler_StartTask(0, 10, readValues);
@@ -47,7 +56,32 @@ void idle(uint32_t idle_period)
   digitalWrite(idle_pin, LOW);
 }
 
+
+// Testing pin 28 - ch1
+void readValues() {
+  digitalWrite(28, HIGH);
+  if (Serial1.available())  {
+    char c = Serial1.read();  //gets one byte from serial buffer
+    
+    if (c == '*') {
+      ind1 = readStringg.indexOf(',');  //finds location of first ,
+      joyRButtonState = readStringg.substring(0, ind1);   //captures first data String
+      ind2 = readStringg.indexOf(',', ind1+1 );   //finds location of second ,
+      joyRX = readStringg.substring(ind1+1, ind2);   //captures second data String
+      ind3 = readStringg.indexOf(',', ind2+1 );
+      joyRY = readStringg.substring(ind2+1, ind3);
+      
+      readStringg=""; //clears variable for new input
+    } else {
+      readStringg += c; //makes the string readString
+    }
+  }
+  digitalWrite(28, LOW);
+}
+
+// Testing pin 29 - ch2
 void sendLaser() {
+  digitalWrite(29, HIGH);
   if (joyRButtonState.toInt() == 0) {
     if (toggle) {
       digitalWrite(laserPin, HIGH);   // set the LED on
@@ -57,9 +91,12 @@ void sendLaser() {
       toggle = !toggle;
     }
   }
+  digitalWrite(29, LOW);
 }
 
+// Testing pin 30 - ch3
 void moveServo() {
+  digitalWrite(30, HIGH);
   if (joyRX.toInt() < 300) {
     if (initial_positionX < 10) { 
     } else { 
@@ -91,25 +128,7 @@ void moveServo() {
       servoY.write (initial_positionY);
     }
   }
-}
-
-void readValues() {
-  if (Serial1.available())  {
-    char c = Serial1.read();  //gets one byte from serial buffer
-    
-    if (c == '*') {
-      ind1 = readStringg.indexOf(',');  //finds location of first ,
-      joyRButtonState = readStringg.substring(0, ind1);   //captures first data String
-      ind2 = readStringg.indexOf(',', ind1+1 );   //finds location of second ,
-      joyRX = readStringg.substring(ind1+1, ind2);   //captures second data String
-      ind3 = readStringg.indexOf(',', ind2+1 );
-      joyRY = readStringg.substring(ind2+1, ind3);
-      
-      readStringg=""; //clears variable for new input
-    } else {
-      readStringg += c; //makes the string readString
-    }
-  }
+  digitalWrite(30, LOW);
 }
 
 void loop() {
