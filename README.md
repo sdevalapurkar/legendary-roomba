@@ -1,6 +1,6 @@
 # The Legendary Roomba
 
-Software for controlling a Roomba robot! It can shoot lasers and do other cool stuff too!!!
+Software for controlling a Roomba robot and some other interesting stuff! It can shoot lasers too!!!
 
 # Components and Programs
 
@@ -33,3 +33,7 @@ A simple program that sweeps the shaft of a RC servo motor back and forth across
 A servo motor is controlled by a pulse varying in width from 500uSec to 2500uSec precisely and periodically. Typically, a pulse is sent once every 20 to 30 mSec. This is the base-period of a PPM control signal, which can control up to 8 servo motors in a RC-remote-controller. Each servo is controlled by a pulse ranged from 0.5mSec to 2.5mSec (500uS to 2500uS). So, for eight servo motors, we need to send 8 x 2.5mSec = 20mSec, which is the minimum based period of a PPM signal.
 
 Center of the servo movement is at 1500 us (90 degrees) and far left and right are at 1000 us (0 degrees) and 2000 us (180 degrees) respectively.
+
+## Context Switching - RTOS
+
+A simple program that creates two tasks so that they can context-switch back and forth. This can be done voluntarily; when one yields, the other runs. Or it can be done (using our timer interrupt handler) so that the tasks switch involuntarily, once every specified time interval. This is a rudimentary round-robin scheduler.
