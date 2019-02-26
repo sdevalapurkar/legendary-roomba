@@ -1,6 +1,7 @@
-#define F_CPU 16000000L		// Specify oscillator frequenc
+#define F_CPU 16000000L		// Specify oscillator frequency
 #include <avr/io.h>
 #include "LED_Test.h"
+
 /**
  * \file LED_Test.c
  * \brief Small set of test functions for controlling LEDs on a AT90USBKey
@@ -25,7 +26,5 @@ void enable_LED(unsigned int mask)
 
 void disable_LEDs(void)
 {
-		PORTC = 0x00;	//Initialize port to high
+    PORTC = 0x00;	//Initialize port to high
 }
-
-
