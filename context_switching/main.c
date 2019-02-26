@@ -30,9 +30,6 @@
  * (See the file "cswitch.S" for details.)
  */
 
-//Comment out the following line to remove debugging code from compiled version.
-//#define DEBUG
-
 typedef void (*voidfuncptr) (void);      /* pointer to void f(void) */
 
 #define WORKSPACE     256
@@ -168,8 +165,6 @@ void Kernel_Create_Task_At( PD *p, voidfuncptr f )
 
    /*----END of NEW CODE----*/
 
-
-
    p->state = READY;
 }
 
@@ -214,7 +209,6 @@ void Dispatch()
    //Moved to bottom (this was in the wrong place).
    NextP = (NextP + 1) % MAXPROCESS;
 }
-
 
 /*================
   * RTOS  API  and Stubs
@@ -296,11 +290,6 @@ void Task_Terminate()
 }
 
 
-/*============
-  * A Simple Test
-  *============
-  */
-
 /**
   * A "Ping" task.
   */
@@ -309,14 +298,12 @@ void Ping()
 	int  x ;
 	init_LED_C6();
 	for(;;){
-		//LED on
-		// enable_LED(LED_C6_GREEN);
 		//LED off
 		disable_LEDs();
 		for( x=0; x < 32000; ++x );   /* do nothing */
 		for( x=0; x < 32000; ++x );   /* do nothing */
 		for( x=0; x < 32000; ++x );   /* do nothing */
-		// Task_Next();
+		// Task_Next(); only used if voluntarily context switching
 	}
 }
 
@@ -335,14 +322,11 @@ void Pong()
 		for( x=0; x < 32000; ++x );   /* do nothing */
 		for( x=0; x < 32000; ++x );   /* do nothing */
 		for( x=0; x < 32000; ++x );   /* do nothing */
-
-		//LED off
-		//disable_LEDs();
-		
-		// Task_Next();
+        // Task_Next(); only used if voluntarily context switching
 	}
 }
 
+// used for involuntary context switching
 ISR(TIMER3_COMPA_vect)
 {
 	if (KernelActive)
@@ -387,10 +371,6 @@ void init_ISR(void)
   */
 int main()
 {
-   //while(1) {
-	   //init_LED_C6();
-	   //enable_LED(LED_C6_GREEN);
-   //}
    OS_Init();
    init_ISR();
    Task_Create( Pong );
