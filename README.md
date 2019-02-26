@@ -34,6 +34,10 @@ A servo motor is controlled by a pulse varying in width from 500uSec to 2500uSec
 
 Center of the servo movement is at 1500 us (90 degrees) and far left and right are at 1000 us (0 degrees) and 2000 us (180 degrees) respectively.
 
+## Timer Interrupt
+
+A simple timer interrupt handler with a frequency of 1 KHz (once every mSec). The main function displays the elapsed time in minutes, seconds and hundredths of a second MM:SS:HH on an LCD.
+
 ## Context Switching - RTOS
 
 A simple program that creates two tasks so that they can context-switch back and forth. This can be done voluntarily; when one yields, the other runs. Or it can be done (using our timer interrupt handler) so that the tasks switch involuntarily, once every specified time interval. This is a rudimentary round-robin scheduler.
