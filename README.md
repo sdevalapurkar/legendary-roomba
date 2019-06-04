@@ -8,6 +8,8 @@ The legend is a semi-autonomous roomba robot for use within a game of defend you
 
 In order to build this robot, functionality from a TTA scheduler we built was used. Periodic and sporadic tasks were utilized as necessary to perform certain tasks at specific times and for specific durations. The roomba library was used to control the movement of the roomba while also allowing other functionality such as being able to play a musical tune using the robot. A uart library was used to allow for communication between our joystick remote station and the base station situated on the roomba itself. Finally, a servo library was used to help control the movement of the servo motors situated on the roomba.
 
+![robo](/robot.png)
+
 ## Architecture
 
 The remote station wiring and architecture (block diagram) was as follows:
